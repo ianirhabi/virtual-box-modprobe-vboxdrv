@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for modfile in $(dirname $(modinfo -n vboxdrv))/*.ko; do
+  echo "Signing $modfile"
+  /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 \
+                                /root/signed-modules/MOK.priv \
+                                /root/signed-modules/MOK.der "$modfile"
+done
